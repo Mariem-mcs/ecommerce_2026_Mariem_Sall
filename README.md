@@ -7,3 +7,4 @@ This repository contains all my labs and assignments for the E-Commerce course.
 
 ## Live Deployments
 - **Lab 01:** http://169.239.251.102:442/~mariem.sall/E-commerce/index.php
+- **Lab 02:** http://169.239.251.102:442/~mariem.sall/E-commerce/Lab2/index.php
