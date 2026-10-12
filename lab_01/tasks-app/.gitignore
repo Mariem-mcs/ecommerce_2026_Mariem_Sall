@@ -1,0 +1,12 @@
+﻿# Environment and secrets
+.env
+*.env
+
+# PHP
+*.swp
+*.swo
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
