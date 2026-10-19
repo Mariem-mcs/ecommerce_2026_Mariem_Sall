@@ -1,7 +1,13 @@
 <?php
 require_once __DIR__ . '/../../core/core.php';
+require_once __DIR__ . '/../../controllers/cartController.php'; 
 
 $base = $base ?? '../../';
+
+// Initializing the cart:
+$cartController = new cartController();
+$cartCount = $cartController->getCartCount(get_ip());
+$cartTotal = $cartController->getCartTotal(get_ip());
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -132,6 +138,7 @@ $base = $base ?? '../../';
                     </button>
                 </form>
             </li>
+            
             <?php if (is_logged_in()): ?>
                 <?php if (is_admin()): ?>
                     <li class="admin-badge">ADMIN</li>
@@ -139,10 +146,25 @@ $base = $base ?? '../../';
                     <li><a href="<?= $base ?>views/admin/category.php"><i class="fa fa-folder-open"></i> Categories</a></li>
                     <li><a href="<?= $base ?>views/admin/product.php"><i class="fa fa-cube"></i> Products</a></li>
                 <?php endif; ?>
-                <li class="user"><i class="fa fa-user"></i> Welcome, <?= htmlspecialchars($_SESSION['customer_name']) ?></li>
+                
+                <!-- CART LINK -->
+                <li style="margin-left: auto;">
+                    <a href="<?= $base ?>views/cart.php" style="color: #facc15;">
+                        <i class="fa fa-shopping-cart"></i> Cart (<?= $cartCount ?>) - GHS <?= number_format($cartTotal, 2) ?>
+                    </a>
+                </li>
+
+                <li class="user" style="margin-left: 15px;"><i class="fa fa-user"></i> Welcome, <?= htmlspecialchars($_SESSION['customer_name']) ?></li>
                 <li><a href="<?= $base ?>logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
             <?php else: ?>
-                <li><a href="<?= $base ?>views/register.php"><i class="fa fa-user-plus"></i> Register</a></li>
+                <!-- CART LINK FOR GUESTS -->
+                <li style="margin-left: auto;">
+                    <a href="<?= $base ?>views/cart.php" style="color: #facc15;">
+                        <i class="fa fa-shopping-cart"></i> Cart (<?= $cartCount ?>) - GHS <?= number_format($cartTotal, 2) ?>
+                    </a>
+                </li>
+
+                <li style="margin-left: 15px;"><a href="<?= $base ?>views/register.php"><i class="fa fa-user-plus"></i> Register</a></li>
                 <li><a href="<?= $base ?>views/login.php"><i class="fa fa-sign-in"></i> Login</a></li>
             <?php endif; ?>
         </ul>
