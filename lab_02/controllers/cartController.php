@@ -3,9 +3,11 @@ require_once __DIR__ . '/../classes/cartClass.php';
 
 class cartController { 
     private $cartModel;
+
     public function __construct() {
         $this->cartModel = new cartClass();
     }
+
     public function isInCart($id, $ip) { return $this->cartModel->isInCart($id, $ip); }
     public function addToCart($id, $qty, $ip) { return $this->cartModel->addToCart($id, $qty, $ip); }
     public function getCartItems($ip) { return $this->cartModel->getCartItems($ip); }
@@ -13,5 +15,13 @@ class cartController {
     public function getCartTotal($ip) { return $this->cartModel->getCartTotal($ip); }
     public function removeFromCart($id, $ip) { return $this->cartModel->removeFromCart($id, $ip); }
     public function updateQty($id, $qty, $ip) { return $this->cartModel->updateQty($id, $qty, $ip); }
+    
+    public function processPayment($customer_id, $ip, $reference, $amount) {
+        return $this->cartModel->processPayment($customer_id, $ip, $reference, $amount);
+    }
+
+    public function getOrderById($order_id) {
+        return $this->cartModel->getOrderById($order_id);
+    }
 }
 ?>
